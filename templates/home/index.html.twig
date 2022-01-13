@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+{% for article in article %}
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ article.title }}</h5>
+    <p class="card-text">{{ article.body | raw}}</p>
+    <a href="#" class="btn btn-primary"></a>
+  </div>
+</div>
+{% endfor %}
+{% if hasPrevious %}
+            <a href="{{ url('home', {'page' : (currentPage-1)}) }}"> << Previous</a>
+        {% endif %}
+        {{ currentPage }}
+        {% if hasNext %}
+            <a href="{{ url('home', {'page' : (currentPage+1)}) }}"> >> Next</a>
+        {% endif %}
+
+
+
+{% endblock %}

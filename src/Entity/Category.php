@@ -18,12 +18,16 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Article::class)]
+    #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Article::class)]
     private Collection $articles;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+    }
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): ?int

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,18 @@ class ArticleRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+    public function findForHome($page): Paginator
+    {
+        $query = $this->createQueryBuilder('a')
+            ->andWhere('a.status = :status')
+            ->setParameter('status', Article::ARTICLE_STATUS_PUBLISHED)
+            ->orderBy('a.publishAt ', 'DESC')
+            ->setFirstResult(($page - 1) * 2)
+            ->setMaxResults(2);
+
+        return  new Paginator($query);
     }
 
     // /**

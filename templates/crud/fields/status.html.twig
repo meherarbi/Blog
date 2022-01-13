@@ -1,0 +1,17 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+
+<i class="w-75 text-center
+{% if field.value == constant('App\\Entity\\Article::ARTICLE_STATUS_DRAFT') %}
+    fas fa-edit text-warning
+{% elseif field.value == constant('App\\Entity\\Article::ARTICLE_STATUS_TO_REVIEW') %}
+    fas fa-hourglass-half text-primary
+{% elseif field.value == constant('App\\Entity\\Article::ARTICLE_STATUS_REJECTED') %}
+    fas fa-ban text-danger
+{% elseif field.value == constant('App\\Entity\\Article::ARTICLE_STATUS_PUBLISHED') %}
+    fas fa-paper-plane text-success
+{% elseif field.value == constant('App\\Entity\\Article::ARTICLE_STATUS_ARCHIVED') %}
+    fas fa-archive text-dark
+{% endif %}
+" title="{{ field.formattedValue|raw }}"></i>
